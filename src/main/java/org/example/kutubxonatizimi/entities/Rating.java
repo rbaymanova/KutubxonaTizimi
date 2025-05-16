@@ -9,14 +9,18 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class User {
+@NoArgsConstructor
+public class Rating {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
-    private String name;
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    @ManyToOne
+    @JoinColumn(name = "book_id")
+    private Book book;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+    private int score;
 
 }
