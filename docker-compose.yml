@@ -1,7 +1,7 @@
 services:
   postgres:
     image: postgres:15
-    container_name: postgres-db
+    container_name: postgres-db-kutubxona
     restart: always
     environment:
       POSTGRES_DB: kutubxonaDB
@@ -14,7 +14,7 @@ services:
 
   pgadmin:
     image: dpage/pgadmin4
-    container_name: pgadmin
+    container_name: pgadmin-kutubxona
     restart: always
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
