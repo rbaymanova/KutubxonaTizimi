@@ -22,6 +22,6 @@ public class Book {
     private int price_day;
     @OneToMany(mappedBy = "book")
     private List<Rating> ratings;
-    private boolean is_available;
-
+    @Enumerated(EnumType.STRING)
+    private BookStatus is_available;
 }

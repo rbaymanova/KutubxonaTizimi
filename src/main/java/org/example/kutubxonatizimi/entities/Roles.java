@@ -1,5 +1,5 @@
 package org.example.kutubxonatizimi.entities;
 
-public enum Role {
-    ADMIN, USER, OPERATOR;
+public enum Roles {
+    ADMIN, USER, OPERATOR
 }
