@@ -1,6 +1,5 @@
 package org.example.kutubxonatizimi.repos;
 
-import jakarta.persistence.Entity;
 import org.example.kutubxonatizimi.entities.BookStatus;
 import org.example.kutubxonatizimi.entities.Reservation;
 import org.springframework.data.jpa.repository.JpaRepository;

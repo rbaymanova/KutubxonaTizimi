@@ -47,7 +47,6 @@ public class ReserveController {
     public double calculatePenalty(@RequestParam Long adminId, @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dueDate,
                                    @RequestParam Long reservationId,
                                    @RequestParam Long userId) {
-        Users user = userService.getUserById(adminId, userId);
         Reservation reservation = reserveService.getReservesById(adminId, reservationId);
         return reserveService.calculatePenalty(reservation, dueDate);
     }
