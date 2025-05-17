@@ -45,8 +45,7 @@ public class ReserveController {
 
     @GetMapping("/penalty")
     public double calculatePenalty(@RequestParam Long adminId, @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dueDate,
-                                   @RequestParam Long reservationId,
-                                   @RequestParam Long userId) {
+                                   @RequestParam Long reservationId) {
         Reservation reservation = reserveService.getReservesById(adminId, reservationId);
         return reserveService.calculatePenalty(reservation, dueDate);
     }
