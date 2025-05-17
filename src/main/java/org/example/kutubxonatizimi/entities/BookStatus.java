@@ -1,5 +1,5 @@
 package org.example.kutubxonatizimi.entities;
 
 public enum BookStatus {
-    RESERVED, BORROWED, RETURNED, EXPIRED;
+    RESERVED, BORROWED, RETURNED, EXPIRED, CANCELLED;
 }
