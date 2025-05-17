@@ -16,16 +16,49 @@ public class UserService {
         this.userRepo = userRepo;
     }
 
-    public List<Users> getAllUsers() {
+    public List<Users> getAllUsers(Long adminId) {
+        Users requester = userRepo.findById(adminId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+        CheckRole.requireAdmin(requester);
         return userRepo.findAll();
     }
-    public Users getUserById(Long id) {
-        return userRepo.getUsersById(id);
+
+    public Users getUserById(Long adminId, Long userId) {
+        Users requester = userRepo.findById(adminId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+        CheckRole.requireAdmin(requester);
+
+        return userRepo.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("Target user not found"));
     }
-    public Users addUser(Users users) {
-        return userRepo.save(users);
+
+    public Users addUser(Long adminId, Users newUser) {
+        Users admin = userRepo.findById(adminId)
+                .orElseThrow(() -> new IllegalArgumentException("Admin user not found"));
+        CheckRole.requireAdmin(admin);
+
+        return userRepo.save(newUser);
     }
-    public void deleteUserById(Long id) {
-        userRepo.deleteById(id);
+
+    public void deleteUserById(Long adminId, Long userId) {
+        Users admin = userRepo.findById(adminId)
+                .orElseThrow(() -> new IllegalArgumentException("Admin user not found"));
+        CheckRole.requireAdmin(admin);
+
+        userRepo.deleteById(userId);
+    }
+
+    public Users updateUser(Long adminId, Long userId, Users updatedDetails) {
+        Users admin = userRepo.findById(adminId)
+                .orElseThrow(() -> new IllegalArgumentException("Admin user not found"));
+        CheckRole.requireAdmin(admin);
+
+        Users existingUser = userRepo.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User to update not found"));
+
+        existingUser.setName(updatedDetails.getName());
+        existingUser.setRoles(updatedDetails.getRoles());
+
+        return userRepo.save(existingUser);
     }
 }

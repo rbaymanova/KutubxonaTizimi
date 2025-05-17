@@ -27,12 +27,12 @@ public class RatingService {
     }
 
 
-    public Rating addRating(Long user_id, Long book_id, int score) {
+    public Rating addRating(Long userId, Long bookId, int score) {
         if (score < 0 || score > 5) {
             throw new IllegalArgumentException("score must be between 0 and 5");
         }
-        Users users = userRepo.findById(user_id).orElseThrow(() -> new IllegalArgumentException("user not found"));
-        Book book = bookRepo.findById(book_id).orElseThrow(() -> new IllegalArgumentException("book not found"));
+        Users users = userRepo.findById(userId).orElseThrow(() -> new IllegalArgumentException("user not found"));
+        Book book = bookRepo.findById(bookId).orElseThrow(() -> new IllegalArgumentException("book not found"));
 
         Rating rating = new Rating();
         rating.setUsers(users);
@@ -42,8 +42,8 @@ public class RatingService {
         return repo.save(rating);
     }
 
-    public double getAvgRating(Long book_id) {
-        List<Rating> ratings = repo.findByBookId(book_id);
+    public double getAvgRating(Long bookId) {
+        List<Rating> ratings = repo.findByBookId(bookId);
         if (ratings.isEmpty()) {
             return 0.0;
         }

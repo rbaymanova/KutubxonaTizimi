@@ -28,19 +28,19 @@ public class BookService {
     public Book getBookById(Long id) {
         return bookRepo.getBookById(id);
     }
-    public Book addBook(Long user_id, Book book) {
-        Users user = userRepo.findById(user_id)
+    public Book addBook(Long adminId, Book book) {
+        Users user = userRepo.findById(adminId)
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
         CheckRole.requireAdminOrOperator(user);
 
         return bookRepo.save(book);
     }
-    public Book updateBook(Long user_id, Long book_id, Book bookDetails) {
-        Users user = userRepo.findById(user_id)
+    public Book updateBook(Long adminId, Long bookId, Book bookDetails) {
+        Users user = userRepo.findById(adminId)
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
         CheckRole.requireAdminOrOperator(user);
 
-        Book book = bookRepo.findById(book_id)
+        Book book = bookRepo.findById(bookId)
                 .orElseThrow(() -> new IllegalArgumentException("Book not found"));
 
         book.setTitle(bookDetails.getTitle());
@@ -51,16 +51,16 @@ public class BookService {
         return bookRepo.save(book);
     }
 
-    public Book partialUpdateBook(Long user_id, Long book_id,
+    public Book partialUpdateBook(Long adminId, Long bookId,
                                   String title,
                                   String author,
                                   Integer price_day,
                                   BookStatus is_available) {
-        Users user = userRepo.findById(user_id)
+        Users user = userRepo.findById(adminId)
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
         CheckRole.requireAdminOrOperator(user);
 
-        Book book = bookRepo.findById(book_id)
+        Book book = bookRepo.findById(bookId)
                 .orElseThrow(() -> new IllegalArgumentException("Book not found"));
 
         if (title != null) book.setTitle(title);
@@ -71,15 +71,15 @@ public class BookService {
         return bookRepo.save(book);
     }
 
-    public void deleteBookById(Long user_id, Long book_id) {
-        Users user = userRepo.findById(user_id)
+    public void deleteBookById(Long adminId, Long bookId) {
+        Users user = userRepo.findById(adminId)
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
         CheckRole.requireAdminOrOperator(user);
 
-        if (!bookRepo.existsById(book_id)) {
+        if (!bookRepo.existsById(bookId)) {
             throw new IllegalArgumentException("Book not found");
         }
 
-        bookRepo.deleteById(book_id);
+        bookRepo.deleteById(bookId);
     }
 }
