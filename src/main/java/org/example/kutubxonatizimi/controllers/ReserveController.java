@@ -44,7 +44,6 @@ public class ReserveController {
     }
 
     @GetMapping("/penalty")
-    //todo time formatting
     public double calculatePenalty(@RequestParam Long adminId, @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dueDate,
                                    @RequestParam Long reservationId,
                                    @RequestParam Long userId) {
