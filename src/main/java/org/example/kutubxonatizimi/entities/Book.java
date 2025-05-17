@@ -1,5 +1,6 @@
 package org.example.kutubxonatizimi.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,6 +22,7 @@ public class Book {
     private String author;
     private int price_day;
     @OneToMany(mappedBy = "book")
+    @JsonIgnore
     private List<Rating> ratings;
     @Enumerated(EnumType.STRING)
     private BookStatus is_available;
