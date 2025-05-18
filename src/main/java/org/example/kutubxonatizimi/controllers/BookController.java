@@ -30,36 +30,36 @@ public class BookController {
 
     @PostMapping("/add")
     public Book addBook(
-            @RequestParam Long userId,
+            @RequestParam Long adminId,
             @RequestBody Book book) {
-        return bookService.addBook(userId, book);
+        return bookService.addBook(adminId, book);
     }
 
 
     @PutMapping("/update/{bookId}")
     public Book updateBook(
-            @RequestParam Long userId,
+            @RequestParam Long adminId,
             @PathVariable Long bookId,
             @RequestBody Book bookDetails) {
-        return bookService.updateBook(userId, bookId, bookDetails);
+        return bookService.updateBook(adminId, bookId, bookDetails);
     }
 
     @PatchMapping("/update/{bookId}")
     public Book partialUpdateBook(
-            @RequestParam Long userId,
+            @RequestParam Long adminId,
             @PathVariable Long bookId,
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String author,
             @RequestParam(required = false) Integer day_price,
             @RequestParam(required = false) BookStatus is_available) {
-        return bookService.partialUpdateBook(userId, bookId, name, author, day_price, is_available);
+        return bookService.partialUpdateBook(adminId, bookId, name, author, day_price, is_available);
     }
 
     @DeleteMapping("/delete/{bookId}")
     public void deleteBook(
-            @RequestParam Long userId,
+            @RequestParam Long adminId,
             @PathVariable Long bookId) {
-        bookService.deleteBookById(userId, bookId);
+        bookService.deleteBookById(adminId, bookId);
     }
 
     @PostMapping("/rating/add/{bookId}")
